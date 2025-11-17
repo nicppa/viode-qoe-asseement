@@ -1,0 +1,51 @@
+# Random Forest Training Configuration
+# Default hyperparameters for Random Forest model training
+
+model_type: random_forest
+
+# Random Forest Hyperparameters
+hyperparameters:
+  # Core parameters
+  n_estimators: 100               # Number of trees
+  max_depth: 10                   # Maximum tree depth
+  
+  # Splitting criteria
+  criterion: 'gini'               # Split criterion (gini or entropy)
+  min_samples_split: 2            # Minimum samples to split
+  min_samples_leaf: 1             # Minimum samples per leaf
+  
+  # Sampling
+  max_features: 'sqrt'            # Number of features per split
+  bootstrap: true                 # Use bootstrap samples
+  
+  # Performance
+  n_jobs: -1                      # Use all CPU cores
+  random_state: 42                # Random seed
+  
+  # Advanced
+  max_leaf_nodes: null            # Maximum leaf nodes
+  min_impurity_decrease: 0.0      # Minimum impurity decrease
+  class_weight: null              # Class weights (null or 'balanced')
+
+# Data Preprocessing
+preprocessing:
+  test_size: 0.15                 # Test set ratio
+  val_size: 0.15                  # Validation set ratio
+  random_state: 42                # Random seed
+  scale_features: true            # Apply StandardScaler
+  handle_missing: 'mean'          # Missing value strategy
+
+# Output Configuration
+output:
+  save_model: true                # Save trained model
+  generate_report: true           # Generate evaluation report
+  plot_confusion_matrix: true     # Plot confusion matrix
+  plot_feature_importance: true   # Plot feature importance
+  save_predictions: false         # Save test predictions
+  
+# Logging
+logging:
+  verbose: true                   # Print detailed logs
+  log_file: 'training.log'        # Log file name
+
+

@@ -1,0 +1,58 @@
+# 视频质量评估系统 - 默认配置
+# Video QoE Assessment System - Default Configuration
+#
+# 本文件定义了系统的默认配置参数
+# 优先级：默认配置 < 场景配置 < 用户配置 < CLI参数 < 环境变量
+
+# ==================== 实验元数据 ====================
+name: "Default Experiment"
+description: "Default configuration for video quality assessment"
+tags: []  # 实验标签，用于分类和搜索
+log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+random_seed: 42    # 随机种子，确保可重复性
+
+# ==================== 网络配置 ====================
+network:
+  bandwidth: "10Mbps"   # 带宽限制 (支持: Kbps, Mbps, Gbps)
+  delay: "20ms"         # 延迟 (支持: ms, s)
+  loss: "0%"            # 丢包率 (0-100%)
+  jitter: "0ms"         # 抖动 (支持: ms, s)
+
+# ==================== 视频配置 ====================
+video:
+  file: ""                      # 视频文件路径（必须指定）
+  expected_resolution: "720p"   # 期望分辨率 (144p/240p/360p/480p/720p/1080p/1440p/4K)
+  server_port: 8000             # HTTP服务器端口
+  segment_duration: 4           # 视频分段时长（秒）
+
+# ==================== 模型配置 ====================
+model:
+  path: "models/xgboost_v1.0.pkl"   # 预训练模型路径
+  type: "xgboost"                    # 模型类型 (xgboost/lightgbm/random_forest/lstm)
+  confidence_threshold: 0.7          # 置信度阈值 (0.0-1.0)
+  feature_count: 35                  # 特征数量
+
+# ==================== 监测配置 ====================
+monitoring:
+  update_interval: 1.0          # 更新间隔（秒）
+  window_size: 10               # 滑动窗口大小（秒）
+  enable_color: true            # 启用彩色输出
+  enable_events: true           # 启用事件标注
+  display_confidence: true      # 显示置信度
+  max_delay_tolerance: 10       # 最大延迟容忍（秒）
+
+# ==================== 输出配置 ====================
+output:
+  base_dir: "experiments"                # 实验数据基础目录
+  save_pcap: true                        # 保存PCAP文件
+  save_features: true                    # 保存特征数据（CSV）
+  save_timeline: true                    # 保存时间线（JSON）
+  save_ground_truth: true                # 保存Ground Truth
+  save_config: true                      # 保存实验配置
+  
+  # 文件名配置
+  pcap_filename: "capture.pcap"
+  features_filename: "features.csv"
+  timeline_filename: "timeline.json"
+  log_filename: "monitor.log"
+

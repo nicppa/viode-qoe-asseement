@@ -1,0 +1,42 @@
+# 4K视频流场景配置
+# 4K Video Streaming Scenario
+#
+# 模拟4K视频流播放，适合研究：
+# - 超高清视频的网络需求
+# - 大数据量传输特征
+# - 高质量视频的QoE评估
+
+name: "4K Video Streaming Experiment"
+description: "High quality 4K video streaming with demanding bandwidth"
+tags: ["4K", "ultra-hd", "high-quality", "bandwidth-intensive"]
+
+network:
+  bandwidth: "25Mbps"   # 4K推荐带宽
+  delay: "10ms"         # 低延迟
+  loss: "0%"            # 理想条件
+  jitter: "0ms"
+
+video:
+  expected_resolution: "4K"  # 4K分辨率
+  segment_duration: 4
+
+monitoring:
+  update_interval: 1.0
+  window_size: 10
+  max_delay_tolerance: 8
+  display_confidence: true
+
+model:
+  path: "models/xgboost_4k_v1.0.pkl"  # 专用4K模型（如果有）
+  confidence_threshold: 0.75
+  feature_count: 35
+
+output:
+  save_pcap: true       # 重要：4K数据量大，需要分析
+  save_features: true
+  save_timeline: true
+  save_config: true
+
+
+
+

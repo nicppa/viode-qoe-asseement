@@ -1,0 +1,38 @@
+# 高延迟场景配置
+# High Latency Scenario
+#
+# 模拟高延迟网络环境，适合研究：
+# - 跨洲/卫星链路
+# - 延迟对初始缓冲的影响
+# - RTT对流控制的影响
+
+name: "High Latency Experiment"
+description: "Simulates high latency network (200ms RTT)"
+tags: ["high-latency", "satellite", "intercontinental"]
+
+network:
+  bandwidth: "10Mbps"   # 正常带宽
+  delay: "200ms"        # 高延迟（模拟卫星链路）
+  loss: "0.5%"          # 轻微丢包
+  jitter: "50ms"        # 较高抖动
+
+video:
+  expected_resolution: "720p"
+  segment_duration: 4
+
+monitoring:
+  update_interval: 2.0  # 降低更新频率
+  window_size: 30       # 大窗口以平滑高延迟影响
+  max_delay_tolerance: 30
+
+model:
+  confidence_threshold: 0.7
+
+output:
+  save_pcap: true
+  save_features: true
+  save_timeline: true   # 记录延迟变化
+
+
+
+

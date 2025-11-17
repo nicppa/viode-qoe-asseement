@@ -1,0 +1,33 @@
+# 高带宽场景配置
+# High Bandwidth Scenario
+#
+# 模拟高带宽网络环境，适合研究：
+# - 高清/4K视频播放
+# - 理想网络条件下的质量评估
+# - 特征基线建立
+
+name: "High Bandwidth Experiment"
+description: "Simulates high bandwidth network conditions (50Mbps)"
+tags: ["high-bandwidth", "4K", "fiber-optic", "ideal-conditions"]
+
+network:
+  bandwidth: "50Mbps"   # 高带宽（模拟光纤）
+  delay: "5ms"          # 低延迟
+  loss: "0%"            # 无丢包
+  jitter: "0ms"         # 无抖动
+
+video:
+  expected_resolution: "1080p"  # 高清分辨率
+  segment_duration: 4
+
+monitoring:
+  update_interval: 1.0
+  window_size: 10
+  max_delay_tolerance: 5   # 严格延迟要求
+
+model:
+  confidence_threshold: 0.8  # 高置信度要求
+
+
+
+

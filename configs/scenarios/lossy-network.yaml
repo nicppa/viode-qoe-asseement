@@ -1,0 +1,37 @@
+# 高丢包场景配置
+# Lossy Network Scenario
+#
+# 模拟高丢包率网络环境，适合研究：
+# - 丢包对视频质量的影响
+# - TCP重传行为
+# - 协议容错能力
+
+name: "Lossy Network Experiment"
+description: "Simulates network with high packet loss (5%)"
+tags: ["packet-loss", "tcp-retransmission", "error-recovery"]
+
+network:
+  bandwidth: "10Mbps"   # 正常带宽
+  delay: "30ms"         # 正常延迟
+  loss: "5%"            # 高丢包率
+  jitter: "20ms"        # 较高抖动
+
+video:
+  expected_resolution: "480p"   # 中等分辨率
+  segment_duration: 4
+
+monitoring:
+  update_interval: 1.0
+  window_size: 20       # 更大窗口以观察重传影响
+  max_delay_tolerance: 20
+
+model:
+  confidence_threshold: 0.6  # 降低置信度以适应不稳定环境
+
+output:
+  save_pcap: true       # 重要：保存PCAP以分析重传
+  save_timeline: true   # 记录丢包事件时间线
+
+
+
+

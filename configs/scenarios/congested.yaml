@@ -1,0 +1,39 @@
+# Congested Network Scenario
+# 模拟网络拥塞场景
+
+name: "Congested Network"
+description: "Simulate congested network with high packet loss and jitter"
+
+# 网络配置
+network:
+  bandwidth: "5Mbps"
+  delay: "80ms"
+  loss: "3%"
+  jitter: "20ms"
+
+# 视频配置
+video:
+  expected_resolution: "480p"
+  expected_bitrate: "2Mbps"
+  duration: 180  # 秒
+
+# 监测配置
+monitoring:
+  update_interval: 1.0  # 秒
+  confidence_threshold: 0.7
+  window_size: 1.0  # 秒
+
+# HTTP服务器配置
+http_server:
+  port: 8000
+  video_dir: "/var/html/out"
+
+# 实验元数据
+metadata:
+  category: "degraded_network"
+  tags: ["congested", "high-loss", "high-jitter", "poor-quality"]
+  expected_stalls: true
+  expected_quality: "low"
+
+
+

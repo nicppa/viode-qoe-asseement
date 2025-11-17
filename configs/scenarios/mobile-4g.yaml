@@ -1,0 +1,39 @@
+# Mobile 4G Scenario
+# 模拟典型的4G移动网络环境
+
+name: "Mobile 4G"
+description: "Simulate typical 4G mobile network conditions"
+
+# 网络配置
+network:
+  bandwidth: "10Mbps"
+  delay: "30ms"
+  loss: "0.5%"
+  jitter: "10ms"
+
+# 视频配置
+video:
+  expected_resolution: "720p"
+  expected_bitrate: "3Mbps"
+  duration: 180  # 秒
+
+# 监测配置
+monitoring:
+  update_interval: 1.0  # 秒
+  confidence_threshold: 0.75
+  window_size: 1.0  # 秒
+
+# HTTP服务器配置
+http_server:
+  port: 8000
+  video_dir: "/var/html/out"
+
+# 实验元数据
+metadata:
+  category: "mobile_network"
+  tags: ["4g", "lte", "mobile", "medium-quality"]
+  expected_stalls: false
+  expected_quality: "medium"
+
+
+

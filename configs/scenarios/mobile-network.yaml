@@ -1,0 +1,40 @@
+# 移动网络场景配置
+# Mobile Network Scenario
+#
+# 模拟移动网络（4G/LTE）环境，适合研究：
+# - 移动场景下的视频播放
+# - 网络切换和波动
+# - 自适应流媒体行为
+
+name: "Mobile Network (4G) Experiment"
+description: "Simulates mobile 4G/LTE network conditions"
+tags: ["mobile", "4G", "LTE", "variable-bandwidth"]
+
+network:
+  bandwidth: "5Mbps"    # 移动网络典型带宽
+  delay: "40ms"         # 移动网络延迟
+  loss: "2%"            # 移动网络丢包
+  jitter: "15ms"        # 较高抖动
+
+video:
+  expected_resolution: "480p"   # 移动网络推荐分辨率
+  segment_duration: 4
+
+monitoring:
+  update_interval: 1.0
+  window_size: 15
+  enable_events: true   # 记录网络波动事件
+  max_delay_tolerance: 15
+
+model:
+  confidence_threshold: 0.65  # 适应移动网络不稳定性
+
+output:
+  save_pcap: true
+  save_features: true
+  save_timeline: true
+  save_ground_truth: true
+
+
+
+

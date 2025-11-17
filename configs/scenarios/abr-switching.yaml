@@ -1,0 +1,72 @@
+# ABR Switching Scenario
+# 测试自适应比特率切换场景
+
+name: "ABR Switching"
+description: "Test Adaptive Bitrate (ABR) switching with varying network conditions"
+
+# 网络配置（初始）
+network:
+  bandwidth: "8Mbps"
+  delay: "40ms"
+  loss: "0.5%"
+  jitter: "10ms"
+
+# 视频配置
+video:
+  expected_resolution: "720p"  # 初始
+  expected_bitrate: "3Mbps"
+  duration: 180  # 秒
+
+# 监测配置
+monitoring:
+  update_interval: 1.0  # 秒
+  confidence_threshold: 0.75
+  window_size: 1.0  # 秒
+
+# HTTP服务器配置
+http_server:
+  port: 8000
+  video_dir: "/var/html/out"
+
+# 动态网络调整配置（特殊）
+network_dynamics:
+  enabled: true
+  phases:
+    - time: 0  # 开始：高质量
+      duration: 60
+      bandwidth: "8Mbps"
+      delay: "40ms"
+      loss: "0.5%"
+      expected_resolution: "720p"
+    
+    - time: 60  # 第60秒：降级
+      duration: 40
+      bandwidth: "3Mbps"
+      delay: "60ms"
+      loss: "1%"
+      expected_resolution: "480p"
+    
+    - time: 100  # 第100秒：恢复
+      duration: 40
+      bandwidth: "12Mbps"
+      delay: "30ms"
+      loss: "0%"
+      expected_resolution: "1080p"
+    
+    - time: 140  # 第140秒：再次降级
+      duration: 40
+      bandwidth: "2Mbps"
+      delay: "80ms"
+      loss: "2%"
+      expected_resolution: "360p"
+
+# 实验元数据
+metadata:
+  category: "adaptive_test"
+  tags: ["abr", "adaptive-bitrate", "quality-switching", "dynamic-network"]
+  expected_stalls: false
+  expected_quality: "variable"
+  notes: "This scenario requires dynamic network adjustment every 40-60 seconds"
+
+
+

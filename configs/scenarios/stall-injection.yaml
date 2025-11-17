@@ -1,0 +1,59 @@
+# Stall Injection Scenario
+# 在实验过程中人为注入卡顿事件
+
+name: "Stall Injection"
+description: "Inject artificial stalls during video playback to test detection"
+
+# 网络配置（基础）
+network:
+  bandwidth: "5Mbps"
+  delay: "40ms"
+  loss: "0.5%"
+  jitter: "5ms"
+
+# 视频配置
+video:
+  expected_resolution: "720p"
+  expected_bitrate: "2.5Mbps"
+  duration: 180  # 秒
+
+# 监测配置
+monitoring:
+  update_interval: 1.0  # 秒
+  confidence_threshold: 0.8
+  window_size: 1.0  # 秒
+
+# HTTP服务器配置
+http_server:
+  port: 8000
+  video_dir: "/var/html/out"
+
+# 卡顿注入配置（特殊）
+stall_injection:
+  enabled: true
+  events:
+    - time: 30  # 第30秒
+      duration: 3  # 持续3秒
+      type: "bandwidth_drop"
+      value: "0.5Mbps"  # 带宽降至0.5Mbps
+    
+    - time: 90  # 第90秒
+      duration: 5  # 持续5秒
+      type: "packet_loss"
+      value: "50%"  # 丢包率升至50%
+    
+    - time: 150  # 第150秒
+      duration: 4  # 持续4秒
+      type: "complete_stall"
+      value: "0Mbps"  # 完全停止
+
+# 实验元数据
+metadata:
+  category: "special_test"
+  tags: ["stall-injection", "test-scenario", "artificial-stalls"]
+  expected_stalls: true
+  expected_quality: "variable"
+  notes: "This scenario requires dynamic network adjustment during experiment"
+
+
+
